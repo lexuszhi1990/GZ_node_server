@@ -12,7 +12,8 @@ app.configure(function(){
   app.use(express.favicon());
   app.use(express.logger('dev'));
   app.use(express.static(__dirname + '/public'));
-  app.use(express.bodyParser());
+  app.use(express.json());
+  app.use(express.urlencoded());
   app.use(express.methodOverride());
   app.use(app.router);
 });
@@ -23,4 +24,9 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 
-console.log("Express server listening on port 3000");
+console.log("Express server listening on port" + 8888);
+
+io.on('connection', function (socket) {
+  var addedUser = false;
+  console.log("log here");
+}
