@@ -23,6 +23,11 @@ $(function () {
     event.preventDefault();
 
     socket.emit("stop");
+    if ($("#stop span").hasClass("icon-stop")) {
+      $("#stop span").removeClass("icon-stop").addClass("icon-play");
+    } else{
+      $("#stop span").removeClass("icon-play").addClass("icon-stop");
+    }
   });
 
   $("#back").click(function (event) {
