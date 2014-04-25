@@ -8,10 +8,7 @@ var bodyParser = require('body-parser');
 var wpi = require('wiring-pi'); // https://github.com/lexuszhi1990/node-wiring-pi
 
 var app = express();
-var server = app.listen(process.env.PORT || 8888);
-var io = require('socket.io').listen(server);
-
-io.on('connection', socketIO.connection);
+var io = require('socket.io');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -56,7 +53,13 @@ app.use(function(err, req, res, next) {
     });
 });
 
-console.log('Express server listening on port ' + app.get('port'));
+if (!module.parent) {
+  // create server
+  io.listen(app.listen(process.env.PORT || 8888)).on('connection', socketIO.connection);
+  console.log('Express server listening on port 8888');
+} else{
+  module.exports = app;
+}
 
-module.exports = app;
+
 
