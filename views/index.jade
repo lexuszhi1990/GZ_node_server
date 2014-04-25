@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  header.bar.bar-nav
+    h1.title= title
+
+  button.btn#stop
+    span.icon.icon-stop
+    | Stop
+  button.btn.btn-primary#left
+    span.icon.icon-left
+    | Left
+  button.btn.btn-positive#right
+    span.icon.icon-right
+    | Right
+  button.btn.btn-negative#back
+    span.icon.icon-down
+    | Back
