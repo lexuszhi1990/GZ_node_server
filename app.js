@@ -1,15 +1,18 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
+var socketIO = require('./routes/socketIO');
 var http = require('http');
 var path = require('path');
 
 var app = express();
-var server = app.listen(8888);
+var server = app.listen(process.env.PORT || 8888);
 var io = require('socket.io').listen(server);
 
+io.on('connection', socketIO.connection);
+
 app.configure(function(){
-  app.set('port', process.env.PORT || 3000);
+  app.set('port', process.env.PORT || 8888);
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -28,33 +31,3 @@ app.configure('development', function(){
 app.get('/', routes.index);
 
 console.log('Express server listening on port ' + app.get('port'));
-
-io.on('connection', function (socket) {
-  var addedUser = false;
-  console.log("One connection comess");
-
-  socket.on('left', function (data) {
-    // we tell the client to execute 'new message'
-    // socket.broadcast.emit('new message', {
-    //   username: socket.username,
-    //   message: data
-    // });
-
-    // move left
-    console.log("move left");
-  });
-
-  socket.on('right', function (data) {
-    // move right
-    console.log("move right");
-  });
-  socket.on('back', function (data) {
-    // move back
-    console.log("move back");
-  });
-  socket.on('stop', function (data) {
-    // move stop
-    console.log("move stop");
-  });
-
-});
