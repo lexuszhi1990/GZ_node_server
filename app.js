@@ -43,4 +43,18 @@ io.on('connection', function (socket) {
     // move left
     console.log("move left");
   });
+
+  socket.on('right', function (data) {
+    // move right
+    console.log("move right");
+  });
+  socket.on('back', function (data) {
+    // move back
+    console.log("move back");
+  });
+  socket.on('stop', function (data) {
+    // move stop
+    console.log("move stop");
+  });
+
 });
