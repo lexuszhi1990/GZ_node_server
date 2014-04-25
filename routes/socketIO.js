@@ -1,8 +1,11 @@
+var express = require('express');
+var router = express.Router();
+
 /*
  * handle Socket message
  */
 
-exports.connection = function (socket) {
+router.connection = function (socket) {
   socket.on('left', function (data) {
     // we tell the client to execute 'new message'
     // socket.broadcast.emit('new message', {
@@ -27,3 +30,5 @@ exports.connection = function (socket) {
     console.log("move stop");
   });
 };
+
+module.exports = router;
