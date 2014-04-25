@@ -1,7 +1,7 @@
 // custom the js files
 
-var setup = function () {
-  alert("SDS");
-};
+$(function () {
+  var socket = io.connect('http://localhost');
 
-$(setup);
+  socket.emit('left');
+});
