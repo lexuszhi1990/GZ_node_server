@@ -1,9 +1,10 @@
-var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
 var socketIO = require('./routes/socketIO');
+var express = require('express');
 var http = require('http');
 var path = require('path');
+var wpi = require('wiring-pi'); // https://github.com/lexuszhi1990/node-wiring-pi
 
 var app = express();
 var server = app.listen(process.env.PORT || 8888);
