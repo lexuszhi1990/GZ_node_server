@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var wpi = require('wiring-pi'); // https://github.com/lexuszhi1990/node-wiring-pi
 
 /*
  * handle Socket message
@@ -14,6 +15,12 @@ router.connection = function (socket) {
     // });
 
     // move left
+
+    wpi.digitalWrite(0, wpi.HIGH);
+    wpi.digitalWrite(7, wpi.HIGH);
+
+    // after 1 seconds
+
     console.log("move left");
   });
 

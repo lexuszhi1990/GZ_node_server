@@ -5,7 +5,6 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var wpi = require('wiring-pi'); // https://github.com/lexuszhi1990/node-wiring-pi
 
 var app = express();
 var io = require('socket.io');
@@ -52,6 +51,15 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
+
+// setup GPIO for raspi
+var wpi = require('wiring-pi');
+wpi.setup();
+wpi.setup('gpio');
+wpi.pinMode(0, wpi.modes.OUTPUT);wpi.pinMode(7, wpi.modes.OUTPUT);
+wpi.pinMode(2, wpi.modes.OUTPUT);wpi.pinMode(3, wpi.modes.OUTPUT);
+wpi.pinMode(1, wpi.modes.OUTPUT);wpi.pinMode(4, wpi.modes.OUTPUT);
+wpi.pinMode(5, wpi.modes.OUTPUT);wpi.pinMode(6, wpi.modes.OUTPUT);
 
 if (!module.parent) {
   // create server
